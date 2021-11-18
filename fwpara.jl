@@ -1,6 +1,25 @@
 # Floyd-Warshall algorithm: https://rosettacode.org/wiki/Floyd-Warshall_algorithm
 # v0.6
- 
+
+using Printf
+
+# return next
+function printresult(dist, next)
+    println("pair     dist    path")
+    for i in 1:size(next, 1), j in 1:size(next, 2)
+        if i != j
+            u = i
+            path = @sprintf "%d -> %d    %2d     %s" i j dist[i, j] i
+            while true
+                u = next[u, j]
+                path *= " -> $u"
+                if u == j break end
+            end
+            println(path)
+        end
+    end
+end
+
 function floydwarshall(weights::Matrix, nvert::Int)
     dist = fill(Inf, nvert, nvert)
     for i in 1:size(weights, 1)
@@ -13,23 +32,6 @@ function floydwarshall(weights::Matrix, nvert::Int)
         if dist[i, k] + dist[k, j] < dist[i, j]
             dist[i, j] = dist[i, k] + dist[k, j]
             next[i, j] = next[i, k]
-        end
-    end
- 
-    # return next
-    function printresult(dist, next)
-        println("pair     dist    path")
-        for i in 1:size(next, 1), j in 1:size(next, 2)
-            if i != j
-                u = i
-                path = @sprintf "%d -> %d    %2d     %s" i j dist[i, j] i
-                while true
-                    u = next[u, j]
-                    path *= " -> $u"
-                    if u == j break end
-                end
-                println(path)
-            end
         end
     end
     printresult(dist, next)
