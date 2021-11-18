@@ -1,6 +1,7 @@
 # COEN 319 Project
-### Authors: Alexandra Kissas, David Krakauer, Colin Rioux
-###### Distributed Floyd-Warshall Implementation in Julia and C++
+Authors: Alexandra Kissas, David Krakauer, Colin Rioux
+This project was made for a graduate course on parallel programing at Santa Clara University, 2021.
+### Distributed Floyd-Warshall Implementation in Julia and C++
 The goal of this project is to demonstrate the usage of Julia in a parallel problem
 in which we can compare its performance with a lower-level language like C++.
 
