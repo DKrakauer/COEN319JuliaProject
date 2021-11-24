@@ -14,3 +14,10 @@ clean:
 
 submit: clean
 	rm -f *.out
+
+dataset:
+	mkdir data
+	mkdir data/2018
+	mkdir data/2021
+	unzip DB1BDataset2018.zip -d data/2018
+	unzip DB1BDataset2021.zip -d data/2021
