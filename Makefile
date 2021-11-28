@@ -21,3 +21,7 @@ dataset:
 	mkdir data/2021
 	unzip DB1BDataset2018.zip -d data/2018
 	unzip DB1BDataset2021.zip -d data/2021
+	python3 preprocess.py
+
+dataset_preproc:
+	python3 preprocess.py
