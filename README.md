@@ -11,7 +11,7 @@ Requirements:
 
 2. Download DB1BDataset2021 from [our mirror](https://drive.google.com/file/d/1-eumEXlShRpxW78l6ernpc0wC5BCH6g7/view?usp=sharing) into the root of the project
 
-Then, in the root of the project:
+3. Then, in the root of the project:
 ```bash
 $ make dataset
 ```
