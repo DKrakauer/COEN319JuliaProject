@@ -2,3 +2,6 @@ data/
 data/*
 *.zip
 .DS_Store
+
+serials
+openmp
