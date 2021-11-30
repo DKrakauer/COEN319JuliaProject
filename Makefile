@@ -3,14 +3,18 @@ OMPSRC := openmp.cpp
 
 default: serial
 
-serial: $(SRC)
+serial: fw_serial
+
+openmp: fw_omp
+
+fw_serial: $(SRC)
 	g++ -O3 -O0 -Wall -Wextra -o $@ $<
 
-openmp: $(OMPSRC)
+fw_omp: $(OMPSRC)
 	g++ -fopenmp -O3 -O0 -g -Wall -Wextra -o $@ $<
 
 clean: 
-	rm -f serial openmp
+	rm -f fw_serial fw_omp
 
 submit: clean
 	rm -f *.out

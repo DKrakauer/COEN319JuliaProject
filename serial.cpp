@@ -96,7 +96,12 @@ static void unload(const char * filename, const int num_nodes, const float * con
 
 }
 
-// d(i,j,k) = min(d(i,j,k-1), d(i,k,k-1) + d(k,j,k-1))
+/**
+ * Find all shortest paths between all pairs of nodes using Floyd-Warshall's algorithm
+ * 
+ * @param num_nodes the number of nodes in the graph
+ * @param graph the current graph
+ */
 static void floyd_warshall(const int num_nodes, float * graph)
 {
     for (int k = 0; k < num_nodes; ++k)
