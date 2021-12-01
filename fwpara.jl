@@ -2,9 +2,13 @@
 # v0.6
 
 using Printf
+using Graphs, SimpleWeightedGraphs
+using GraphPlot
+using DelimitedFiles
+# using PyCall
 
 # return next
-function printresult(dist, next)
+function print_result(dist, next)
     println("pair     dist    path")
     for i in 1:size(next, 1), j in 1:size(next, 2)
         if i != j
@@ -20,8 +24,8 @@ function printresult(dist, next)
     end
 end
 
-function floydwarshall(weights::Matrix, nvert::Int)
-    dist = fill(Inf, nvert, nvert)
+function floyd_warshall(weights::Matrix, nvert::Int)
+    dist = fill(Inf, nvert, nvert) #fill returns an arr
     for i in 1:size(weights, 1)
         dist[weights[i, 1], weights[i, 2]] = weights[i, 3]
     end
@@ -34,7 +38,43 @@ function floydwarshall(weights::Matrix, nvert::Int)
             next[i, j] = next[i, k]
         end
     end
-    printresult(dist, next)
+    print_result(dist, next)
 end
- 
-floydwarshall([1 3 -2; 2 1 4; 2 3 3; 3 4 2; 4 2 -1], 4)
+
+
+function runTests()
+    
+    # floyd_warshall([1 3 -2; 2 1 4; 2 3 3; 3 4 2; 4 2 -1], 4)
+    # write new graph file with 0s for Inf
+
+    # create matrix from graph file
+    # m = readdlm("test/5j.graph")
+    x = readdlm("test/5.graph")
+    n = x[1,1]
+    x = x[2:6, 1:5]
+    for n in eachindex(x)
+        if isinf(x[n])
+            x[n] = 0
+        end
+        # println(n)
+    end
+
+    # create graph from matrix
+    convert(Matrix{Float64}, x)
+    m = Matrix{Float64}(x)
+    g = SimpleWeightedDiGraph(m)
+
+    # run floyd'warshall parallel
+    enumerate_paths(floyd_warshall_shortest_paths(g))
+
+    # run dijkstra across all sources
+    # enumerate_paths(dijkstra_shortest_paths(g, vertices(g)))
+
+    # g = SimpleWeightedGraph()
+    # enumerate_paths(floyd_warshall_shortest_paths(g, w, true))
+    
+
+end
+
+runTests()
+
