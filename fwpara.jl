@@ -1,11 +1,15 @@
 # Floyd-Warshall algorithm: https://rosettacode.org/wiki/Floyd-Warshall_algorithm
 # v0.6
 
-using Printf
-using Graphs, SimpleWeightedGraphs
-using GraphPlot
-using DelimitedFiles
+using Printf # @sprintf
+using Graphs, SimpleWeightedGraphs # JuliaGraphs, floyd-floyd_warshall_shortest_paths, SimpleWeightedDiGraph
+using GraphPlot # gplot
+using DelimitedFiles # readdlm
+using BenchmarkTools # @btime
+using TickTock
 # using PyCall
+
+import Graphs.Parallel
 
 # return next
 function print_result(dist, next)
@@ -62,10 +66,17 @@ function runTests()
     # create graph from matrix
     convert(Matrix{Float64}, x)
     m = Matrix{Float64}(x)
-    g = SimpleWeightedDiGraph(m)
+    g1 = SimpleWeightedDiGraph(m)
 
     # run floyd'warshall parallel
-    enumerate_paths(floyd_warshall_shortest_paths(g))
+    tick()
+    enumerate_paths(Graphs.floyd_warshall_shortest_paths(g1))
+    tock()
+
+    g2 = SimpleWeightedDiGraph(m)
+    tick()
+    enumerate_paths(Parallel.floyd_warshall_shortest_paths(g2))
+    tock()
 
     # run dijkstra across all sources
     # enumerate_paths(dijkstra_shortest_paths(g, vertices(g)))
