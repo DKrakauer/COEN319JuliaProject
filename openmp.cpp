@@ -104,17 +104,20 @@ static void unload(const char *filename, const int num_nodes, const float *const
  */
 static void floyd_warshall(const int num_nodes, float *graph)
 {
-    for (int k = 0; k < num_nodes; ++k)
+    # pragma omp parallel
     {
-        # pragma omp for collapse(2)
-        for (int src = 0; src < num_nodes; ++src)
+        for (int k = 0; k < num_nodes; ++k)
         {
-            for (int dest = 0; dest < num_nodes; ++dest)
+            # pragma omp for collapse(2)
+            for (int src = 0; src < num_nodes; ++src)
             {
-                float other = graph[src * num_nodes + k] + graph[k * num_nodes + dest];
-                if (graph[src * num_nodes + dest] > other)
+                for (int dest = 0; dest < num_nodes; ++dest)
                 {
-                    graph[src * num_nodes + dest] = other;
+                    float other = graph[src * num_nodes + k] + graph[k * num_nodes + dest];
+                    if (graph[src * num_nodes + dest] > other)
+                    {
+                        graph[src * num_nodes + dest] = other;
+                    }
                 }
             }
         }
