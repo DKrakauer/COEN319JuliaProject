@@ -12,5 +12,9 @@
 #
 
 source /WAVE/users/unix/dkrakauer/julia
-cd working/folder/of/your/choice
-julia my_clustermanager_script.jl
+cd /WAVE/users/unix/dkrakauer/COEN319JuliaProject
+
+for g in 1 2 4 8 16 28; do
+    echo ________________ Threads ${g} ________________
+    julia fwpara.jl --threads ${g}
+done
