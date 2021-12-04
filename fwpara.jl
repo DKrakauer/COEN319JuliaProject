@@ -48,16 +48,17 @@ function floyd_warshall_parallel(g::SimpleWeightedDiGraph{Int64, Float64})
 
     for k in vertices(g)
         @threads for j in 1:n
+            # calculate first value
             d = dist[k, j]
-            if d != Inf && j != k
+            if d != Inf && j != k # if the first value is infinite or == k, skip the next loop
                 for i in 1:n
                     if dist[i, k] == Inf || i == k
-                        ans = Inf
+                        ans = Inf #if the other side is inf, set the comparison value to inf
                     else
-                        ans = dist[i,k] + d
+                        ans = dist[i,k] + d # otherwise, calculate the correct value
                     end
 
-                    if dist[i,j] > ans
+                    if dist[i,j] > ans # do the comparison
                         dist[i,j] = ans
                     end
                 end
@@ -69,16 +70,16 @@ function floyd_warshall_parallel(g::SimpleWeightedDiGraph{Int64, Float64})
 end
 
 
-function runTests()
+function runTests(file::String)
     
     # floyd_warshall([1 3 -2; 2 1 4; 2 3 3; 3 4 2; 4 2 -1], 4)
     # write new graph file with 0s for Inf
 
     # create matrix from graph file
     # m = readdlm("test/5j.graph")
-    x = readdlm("test/5.graph")
+    x = readdlm(file)
     n = x[1,1]
-    x = x[2:6, 1:5]
+    x = x[2:n+1, 1:n]
     for n in eachindex(x)
         if isinf(x[n])
             x[n] = 0
@@ -118,5 +119,7 @@ function runTests()
 
 end
 
-runTests()
+runTests("test/1000.graph")
+runTests("test/2500.graph")
+runTests("test/5000.graph")
 
