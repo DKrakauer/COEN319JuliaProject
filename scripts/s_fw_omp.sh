@@ -19,7 +19,9 @@ module load gcc/10.2.0
 cd /home/crioux/project
 make fw_omp
 for g in 1 2 4 8 16 28; do
-    ./fw_omp /home/crioux/p3/10000.graph outs/omp-BIG1-${g}.out -t ${g}
-    #./fw_omp /home/crioux/project/data/Origin_and_Destination_Survey_DB1BMarket_2018_1.csv.graph outs/omp_2018-${g}.out -t ${g}
-    #./fw_omp /home/crioux/project/data/Origin_and_Destination_Survey_DB1BMarket_2021_1.csv.graph outs/omp_2021-${g}.out -t ${g}
+    ./fw_omp /home/crioux/project/1000.graph outs/omp-1000-${g}.out -t ${g}
+    ./fw_omp /home/crioux/project/2500.graph outs/omp-2500-${g}.out -t ${g}
+    ./fw_omp /home/crioux/project/5000.graph outs/omp-5000-${g}.out -t ${g}
+    ./fw_omp /home/crioux/project/data/Origin_and_Destination_Survey_DB1BMarket_2018_1.csv.graph outs/omp_2018-${g}.out -t ${g}
+    ./fw_omp /home/crioux/project/data/Origin_and_Destination_Survey_DB1BMarket_2021_1.csv.graph outs/omp_2021-${g}.out -t ${g}
 done
