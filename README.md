@@ -2,7 +2,7 @@
 Authors: Alexandra Kissas, David Krakauer, Colin Rioux
 This project was made for a graduate course on parallel programing at Santa Clara University, 2021.
 
-### Distributed Floyd-Warshall Implementation in Julia and C++
+## Distributed Floyd-Warshall Implementation in Julia and C++
 The goal of this project is to demonstrate the usage of Julia in a parallel problem
 in which we can compare its performance with a lower-level language like C++.
 
@@ -31,7 +31,7 @@ $ make dataset
 5. Optionally, 
 This script will unpack the datasets present in the `/data` directory & preprocess them into our graph format.
 
-## Setting up the julia envirnoment on WAVE (Or any other HPC envirnoment)
+### Setting up the julia envirnoment on WAVE (Or any other HPC envirnoment)
 1. First, download the julia envirnoment files from https://julialang.org/downloads/, and download the binary for your system. (For WAVE, it would be the generic linux binaries (Linux x86).
 2. Next, create a directory with the unpacked files and create a file named `j_env`
 
@@ -49,13 +49,17 @@ cd /WAVE/user/unix//{USER}/{Project Location}
 ```
 An example script can be found in `/scripts/s_fw_julia.sh`
 
-# Julia compilation
+## Julia compilation
 1. Julia can be compiled and run with the `julia fwpara.jl`
 2. To run with threads, export the `export JULIA_NUM_THREADS={Thread Count}` envirnoment variable before running fwpara.jl
 
-# C++/OpenMP compilation
+## C++/OpenMP compilation
 1. Our C++ implementations can be compiled using our Makefile.
 ```bash
 make clean default
 ```
 2. The resulting executables with be named `fw_serial` for serial and `fw_omp` for openmp.
+
+
+## Experiments
+Our experiments (slurm scripts) are located in the `scripts/` folder.
