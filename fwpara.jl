@@ -100,12 +100,12 @@ function runTests(file::String)
 
     tick()
     r = Parallel.floyd_warshall_shortest_paths(g)
-    println(r)
+    #println(r)
     tock()
 
     tick()
     r = floyd_warshall_parallel(g)
-    println(r)
+    #println(r)
     tock()
 
     
@@ -119,7 +119,6 @@ function runTests(file::String)
 
 end
 
-runTests("test/1000.graph")
-runTests("test/2500.graph")
-runTests("test/5000.graph")
+runTests("data/2018.graph")
+runTests("data/2021.graph")
 
