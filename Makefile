@@ -1,11 +1,7 @@
 SRC := serial.cpp
 OMPSRC := openmp.cpp
 
-default: serial
-
-serial: fw_serial
-
-openmp: fw_omp
+default: fw_serial fw_omp
 
 fw_serial: $(SRC)
 	g++ -O3 -O0 -Wall -Wextra -o $@ $<

@@ -19,7 +19,7 @@ Requirements:
 ### Dataset
 1. Download DB1BDataset2018 from [our mirror](https://drive.google.com/file/d/19sXIK9Zo7ZZ2VoEBTIejD-cYezjQXATe/view?usp=sharing) into the root of the project.
 
-2. Download DB1BDataset2021 from [our mirror](https://drive.google.com/file/d/1-eumEXlShRpxW78l6ernpc0wC5BCH6g7/view?usp=sharing) into the root of the project
+2. Download DB1BDataset2021 from [our mirror](https://drive.google.com/file/d/1-eumEXlShRpxW78l6ernpc0wC5BCH6g7/view?usp=sharing) into the root of the project.
 
 3. Then, place these into the `/data` directory within the project files.
 
@@ -54,5 +54,8 @@ An example script can be found in `/scripts/s_fw_julia.sh`
 2. To run with threads, export the `export JULIA_NUM_THREADS={Thread Count}` envirnoment variable before running fwpara.jl
 
 # C++/OpenMP compilation
-
-
+1. Our C++ implementations can be compiled using our Makefile.
+```bash
+make clean default
+```
+2. The resulting executables with be named `fw_serial` for serial and `fw_omp` for openmp.
