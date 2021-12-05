@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """
 Preprocess the dataset into operable graph representations
 Author: Colin Rioux <crioux@scu.edu>
